@@ -1,4 +1,3 @@
-//config
 module.exports = {
     googleClientID:
         '665896090171-m1gj65ebnth73ur5vjt5jrhdfvg91bje.apps.googleusercontent.com',

@@ -19,6 +19,7 @@ MongoClient.connect(keys.mongoURI,(err,client) => {
         console.log(JSON.stringify(results.ops, undefined, 2));
     });
 
+
     db.collection('users').insertOne({
         "username": "gkandale27",
         "FullName": "George Kendalepas",
