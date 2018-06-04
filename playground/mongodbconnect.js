@@ -10,7 +10,7 @@ MongoClient.connect(keys.mongoURI,(err,client) => {
     const db = client.db('blog_dev');
 
     db.collection('todos').insertOne({
-        "text": "move tree stumps",
+        "text": "remove tree stumps",
         "completed": "true"
     }, (err,results) => {
         if (err){
@@ -19,18 +19,18 @@ MongoClient.connect(keys.mongoURI,(err,client) => {
         console.log(JSON.stringify(results.ops, undefined, 2));
     });
 
-    db.collection('users').insertOne({
-        "username": "gkandale27",
-        "FullName": "George Kendalepas",
-        "age": 49,
-        "location": "D'Sicks"
-    }, (err,results) => {
-        if (err){
-            return console.log('Unable to insert user', err);
-        }
-        console.log(JSON.stringify(results.ops, undefined, 2));
-        console.log(results.ops[0]._id.getTimestamp());
-    });
+    // db.collection('users').insertOne({
+    //     "username": "gkandale27",
+    //     "FullName": "George Kendalepas",
+    //     "age": 49,
+    //     "location": "D'Sicks"
+    // }, (err,results) => {
+    //     if (err){
+    //         return console.log('Unable to insert user', err);
+    //     }
+    //     console.log(JSON.stringify(results.ops, undefined, 2));
+    //     console.log(results.ops[0]._id.getTimestamp());
+    // });
 
     client.close();
 });
