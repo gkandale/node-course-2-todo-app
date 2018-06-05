@@ -5,6 +5,7 @@ const { ObjectID } = require('mongodb');
 const { mongoose } = require('./db/mongoose');
 const { todo } = require('./models/todo');
 const { user } = require('./models/user');
+const { accounts } = require('./models/accounts');
 
 var app = express();
 const port = process.env.PORT || 3000;
@@ -66,6 +67,14 @@ app.get('/todos/:id', (req,res) => {
     res.send({todo});
     //console.log('Todo by ID', todo);
     }).catch((e) => res.status(400).send());
+});
+
+app.get('/rest/accounts', (req,res) => {
+    accounts.find().then((accounts) => {
+        res.send({accounts});
+    }, (e) => {
+        res.status(400).send(e);
+    })
 });
 
 app.listen(port, () => {
