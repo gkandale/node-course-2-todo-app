@@ -69,12 +69,52 @@ app.get('/todos/:id', (req,res) => {
     }).catch((e) => res.status(400).send());
 });
 
+
+
 app.get('/rest/accounts', (req,res) => {
     accounts.find().then((accounts) => {
         res.send({accounts});
     }, (e) => {
         res.status(400).send(e);
     })
+});
+
+
+app.get('/rest/account/:username', (req,res) => {
+    var user = req.params.username;
+
+    accounts.find({username: user}).then((accounts) => {
+        if (!accounts){
+            return res.status(404).send();
+        }
+        res.send({accounts});
+    }).catch((e) => res.status(404).send());
+});
+
+app.post('/rest/account', (req, res) => {
+    var account = new accounts({
+        username: req.body.username,
+        password: req.body.password,
+        fullname: req.body.fullname,
+        acountNumb: new ObjectID() + Math.random(100000)
+    });
+
+    account.save().then((doc)=>{
+        res.send(doc);
+    }, (e) => {
+        res.status(400).send(e);
+    });
+});
+
+app.delete('/rest/account/:username', (req, res) => {
+    var user = req.params.username;
+
+    accounts.findOneAndRemove({username: user}).then((accounts) => {
+        if (!accounts){
+            return res.status(404).send();
+        }
+        res.send({accounts});
+    }).catch((e) => res.status(404).send());
 });
 
 app.listen(port, () => {
