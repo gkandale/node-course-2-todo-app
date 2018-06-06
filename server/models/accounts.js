@@ -1,7 +1,4 @@
 var mongoose = require('mongoose');
-const { ObjectID } = require('mongodb');
-
-var actnum = new ObjectID();
 
 var accounts = mongoose.model('accounts', {
     username: {
